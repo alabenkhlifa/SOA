@@ -1,0 +1,19 @@
+---
+config:
+  theme: forest
+---
+flowchart TD
+    User
+    Profile
+    Comment
+
+    Profile --> Post
+    Profile --> Like
+    Profile --> Comment
+    Comment --> Post
+    Like --> Comment
+    Like --> Post
+
+    Profile --> User
+
+    User --> Message
