@@ -7,7 +7,8 @@ import tn.ensit.soa.services.UserService;
 import java.util.List;
 import java.util.Optional;
 
-@RestController("/users")
+@RestController
+@RequestMapping("/users")
 public class UserController {
 
     private final UserService service;
@@ -16,7 +17,7 @@ public class UserController {
         this.service = service;
     }
 
-    @GetMapping("/")
+    @GetMapping
     public List<User> getAllUsers() {
         return service.getAllUsers();
     }
@@ -26,8 +27,8 @@ public class UserController {
         return service.getOneUser(id);
     }
 
-    @PostMapping("/")
-    public User createUser(@RequestBody String username) {
-        return service.createUser(username);
+    @PostMapping
+    public User createUser(@RequestBody User user) {
+        return service.createUser(user);
     }
 }
