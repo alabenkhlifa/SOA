@@ -1,11 +1,11 @@
 package tn.ensit.soa.controllers;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tn.ensit.soa.entities.User;
 import tn.ensit.soa.services.UserService;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
@@ -18,13 +18,14 @@ public class UserController {
     }
 
     @GetMapping
-    public List<User> getAllUsers() {
-        return service.getAllUsers();
+    public ResponseEntity<List<User>> getAllUsers() {
+        return ResponseEntity.ok(service.getAllUsers());
     }
 
     @GetMapping("/{id}")
-    public Optional<User> getOneUser(@PathVariable Long id) {
-        return service.getOneUser(id);
+    public ResponseEntity<User> getOneUser(@PathVariable Long id) {
+        var user = service.getOneUser(id);
+        return user.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
