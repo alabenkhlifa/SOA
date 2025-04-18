@@ -12,11 +12,10 @@ public class Message {
     private String channelId;
 
     @ManyToOne
-    @JoinColumn(name = "sender_id", referencedColumnName = "sender_id")
+    @JoinColumn(name = "sender_id", referencedColumnName = "id")
     private User sender;
 
     @ManyToOne
-    @JoinColumn(name = "receiver_id", referencedColumnName = "receiver_id")
     private User receiver;
     public Message() {}
 
