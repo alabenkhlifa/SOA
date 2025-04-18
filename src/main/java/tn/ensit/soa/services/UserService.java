@@ -46,7 +46,7 @@ public class UserService {
         return createdUser;
     }
     public User register(String username, String email, String password, String bio) {
-        User user = new User(username, email, password);
+        User user = new User(username);
         user = userRepository.save(user);
         Profile profile = new Profile(user, bio);
         profileRepository.save(profile);
