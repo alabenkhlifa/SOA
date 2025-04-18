@@ -3,11 +3,14 @@ package tn.ensit.soa.dto;
 public class MessageDto {
     private String channelId;
 
-    private Long authorId;
+    private Long senderId;
+    private Long receiverId;
+    private String content;
 
-    public MessageDto(String channelId, Long authorId) {
+    public MessageDto(String channelId, Long authorId, String content) {
         this.channelId = channelId;
-        this.authorId = authorId;
+        this.senderId = senderId;
+        this.content = content;
     }
 
     public String getChannelId() {
@@ -18,11 +21,23 @@ public class MessageDto {
         this.channelId = channelId;
     }
 
-    public Long getAuthorId() {
-        return authorId;
+    public Long getSenderId() {
+        return senderId;
     }
 
-    public void setAuthorId(Long authorId) {
-        this.authorId = authorId;
+    public void setSenderId(Long senderId) {
+        this.senderId = senderId;
+    }
+
+    public Long getReceiverId() {
+        return receiverId;
+    }
+
+    public void setReceiverId(Long receiverId) {
+        this.receiverId = receiverId;
+    }
+
+    public String getContent() {
+        return content;
     }
 }

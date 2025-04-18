@@ -24,17 +24,19 @@ public class MessageService {
     }
 
     public Message saveMessage(MessageDto dto) {
-        Optional<User> user = userService.getOneUser(dto.getAuthorId());
+        Optional<User> user = userService.getOneUser(dto.getReceiverId());
         if(user.isPresent()) {
             Message message = new Message(dto.getChannelId(), user.get());
             return messageRepository.save(message);
         } else {
-            String message = "Error while saving Message, user with id %d does not exist.".formatted(dto.getAuthorId());
+            String message = "Error while saving Message, user with id %d does not exist.".formatted(dto.getReceiverId());
             LOGGER.severe(message);
             throw new RuntimeException(message);
         }
     }
-
+    public List<Message> getMessagesBetween(User sender, User receiver) {
+        return messageRepository.findBySenderAndReceiver(sender, receiver);
+    }
     public List<Message> getAllMessages() {
         return messageRepository.findAll();
     }
