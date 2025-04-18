@@ -5,7 +5,6 @@ public class PostDto {
     private Long authorId;
     private String content;
 
-    // Getters and setters
 
     public Long getAuthorId() {
         return authorId;

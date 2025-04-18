@@ -22,9 +22,6 @@ public class UserService {
 
     private final ProfileService profileService;
 
-    @Autowired
-    private ProfileRepository profileRepository;
-
     public UserService(UserRepository repository, ProfileService profileService) {
         this.userRepository = repository;
         this.profileService = profileService;
@@ -45,23 +42,8 @@ public class UserService {
         profileService.createProfile(profile);
         return createdUser;
     }
-    public User register(String username, String email, String password, String bio) {
-        User user = new User(username);
-        user = userRepository.save(user);
-        Profile profile = new Profile(user, bio);
-        profileRepository.save(profile);
-        return user;
-    }
 
     public User findById(Long id) {
         return userRepository.findById(id).orElseThrow();
-    }
-
-    public User findByUsername(String username) {
-        return userRepository.findByUsername(username);
-    }
-
-    public User findByEmail(String email) {
-        return userRepository.findByEmail(email);
     }
 }
