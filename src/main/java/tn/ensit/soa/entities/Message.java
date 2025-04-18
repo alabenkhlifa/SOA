@@ -12,14 +12,22 @@ public class Message {
     private String channelId;
 
     @ManyToOne
-    @JoinColumn(name = "author_id", referencedColumnName = "id")
-    private User author;
+    @JoinColumn(name = "sender_id", referencedColumnName = "sender_id")
+    private User sender;
 
+    @ManyToOne
+    @JoinColumn(name = "receiver_id", referencedColumnName = "receiver_id")
+    private User receiver;
     public Message() {}
 
-    public Message(String channelId, User author) {
+    public Message(String channelId, User sender, User receiver) {
         this.channelId = channelId;
-        this.author = author;
+        this.sender = sender;
+        this.receiver = receiver;
+    }
+    public Message(String channelId, User receiver) {
+        this.channelId = channelId;
+        this.receiver = receiver;
     }
 
     public Long getId() {
@@ -38,12 +46,20 @@ public class Message {
         this.channelId = channelId;
     }
 
-    public User getAuthor() {
-        return author;
+    public User getSender() {
+        return sender;
     }
 
-    public void setAuthor(User author) {
-        this.author = author;
+    public void setSender(User sender) {
+        this.sender = sender;
+    }
+
+    public User getReceiver() {
+        return receiver;
+    }
+
+    public void setReceiver(User receiver) {
+        this.receiver = receiver;
     }
 
     @Override
@@ -51,7 +67,8 @@ public class Message {
         return "Message{" +
                 "id=" + id +
                 ", channelId='" + channelId + '\'' +
-                ", author=" + author +
+                ", sender=" + sender +
+                ", receiver=" + receiver +
                 '}';
     }
 }
