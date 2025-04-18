@@ -1,9 +1,9 @@
-package tn.ensit.soa.Communication.services;
+package tn.ensit.soa.chat.message.services;
 
 import org.springframework.stereotype.Service;
-import tn.ensit.soa.Communication.dto.MessageDto;
-import tn.ensit.soa.Communication.entities.Message;
-import tn.ensit.soa.Communication.repositories.MessageRepository;
+import tn.ensit.soa.chat.message.dto.MessageDto;
+import tn.ensit.soa.chat.message.entities.Message;
+import tn.ensit.soa.chat.message.repositories.MessageRepository;
 import tn.ensit.soa.User.entities.User;
 import tn.ensit.soa.User.services.UserService;
 

@@ -1,7 +1,7 @@
 package tn.ensit.soa.User.entities;
 
 import jakarta.persistence.*;
-import tn.ensit.soa.Communication.entities.Message;
+import tn.ensit.soa.chat.message.entities.Message;
 import tn.ensit.soa.Content.entities.Post;
 
 import java.util.ArrayList;

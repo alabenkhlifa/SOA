@@ -1,4 +1,4 @@
-package tn.ensit.soa.Communication.dto;
+package tn.ensit.soa.chat.message.dto;
 
 public class MessageDto {
     private String channelId;

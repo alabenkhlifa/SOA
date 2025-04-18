@@ -1,8 +1,8 @@
-package tn.ensit.soa.Communication.repositories;
+package tn.ensit.soa.chat.message.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import tn.ensit.soa.Communication.entities.Message;
+import tn.ensit.soa.chat.message.entities.Message;
 import tn.ensit.soa.User.entities.User;
 
 import java.util.List;

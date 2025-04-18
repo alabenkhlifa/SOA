@@ -1,11 +1,11 @@
-package tn.ensit.soa.Communication.controllers;
+package tn.ensit.soa.chat.message.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import tn.ensit.soa.Communication.dto.MessageDto;
-import tn.ensit.soa.Communication.entities.Message;
-import tn.ensit.soa.Communication.services.MessageService;
+import tn.ensit.soa.chat.message.dto.MessageDto;
+import tn.ensit.soa.chat.message.entities.Message;
+import tn.ensit.soa.chat.message.services.MessageService;
 import tn.ensit.soa.User.entities.User;
 import tn.ensit.soa.User.services.UserService;
 

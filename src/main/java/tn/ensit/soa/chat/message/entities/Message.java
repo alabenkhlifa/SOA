@@ -1,4 +1,4 @@
-package tn.ensit.soa.Communication.entities;
+package tn.ensit.soa.chat.message.entities;
 
 import jakarta.persistence.*;
 import tn.ensit.soa.User.entities.User;
