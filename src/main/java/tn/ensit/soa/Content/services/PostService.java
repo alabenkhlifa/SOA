@@ -12,11 +12,14 @@ import java.util.List;
 @Service
 public class PostService {
 
-    @Autowired
-    private PostRepository postRepository;
+    private final PostRepository postRepository;
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+
+    public PostService(PostRepository postRepository, UserRepository userRepository) {
+        this.postRepository = postRepository;
+        this.userRepository = userRepository;
+    }
 
     public Post createPost(Long authorId, String content) {
         User author = userRepository.findById(authorId).orElseThrow();
@@ -27,5 +30,9 @@ public class PostService {
     public List<Post> getPostsByAuthor(Long authorId) {
         User author = userRepository.findById(authorId).orElseThrow();
         return postRepository.findByAuthor(author);
+    }
+
+    public Post findById(Long id) {
+        return postRepository.findById(id).orElseThrow();
     }
 }

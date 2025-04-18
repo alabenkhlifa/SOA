@@ -6,7 +6,6 @@ import tn.ensit.soa.User.entities.User;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "post_comments")
 public class Comment {
 
     @Id

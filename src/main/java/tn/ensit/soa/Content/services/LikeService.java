@@ -3,35 +3,36 @@ package tn.ensit.soa.Content.services;
 import tn.ensit.soa.Content.entities.Like;
 import tn.ensit.soa.Content.entities.Post;
 import tn.ensit.soa.Content.repositories.LikeRepository;
-import tn.ensit.soa.Content.repositories.PostRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.ensit.soa.User.entities.User;
-import tn.ensit.soa.User.repositories.UserRepository;
+import tn.ensit.soa.User.services.UserService;
 
 import java.util.List;
 
 @Service
 public class LikeService {
 
-    @Autowired
-    private LikeRepository likeRepository;
+    private final LikeRepository repository;
 
-    @Autowired
-    private PostRepository postRepository;
+    private final PostService postService;
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserService userService;
+
+    public LikeService(LikeRepository likeRepository, PostService postService, UserService userService) {
+        this.repository = likeRepository;
+        this.postService = postService;
+        this.userService = userService;
+    }
 
     public Like likePost(Long userId, Long postId) {
-        User user = userRepository.findById(userId).orElseThrow();
-        Post post = postRepository.findById(postId).orElseThrow();
+        User user = userService.findById(userId);
+        Post post = postService.findById(postId);
         Like like = new Like(user, post);
-        return likeRepository.save(like);
+        return repository.save(like);
     }
 
     public List<Like> getLikesByPost(Long postId) {
-        Post post = postRepository.findById(postId).orElseThrow();
-        return likeRepository.findByPost(post);
+        Post post = postService.findById(postId);
+        return repository.findByPost(post);
     }
 }

@@ -1,6 +1,5 @@
 package tn.ensit.soa.User.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.ensit.soa.User.entities.FriendRequest;
 import tn.ensit.soa.User.entities.User;
@@ -12,11 +11,14 @@ import java.util.List;
 @Service
 public class FriendRequestService {
 
-    @Autowired
-    private FriendRequestRepository friendRequestRepository;
+    private final FriendRequestRepository friendRequestRepository;
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+
+    public FriendRequestService(FriendRequestRepository friendRequestRepository, UserRepository userRepository) {
+        this.friendRequestRepository = friendRequestRepository;
+        this.userRepository = userRepository;
+    }
 
     public FriendRequest sendFriendRequest(Long requesterId, Long receiverId) {
         User requester = userRepository.findById(requesterId).orElseThrow();
