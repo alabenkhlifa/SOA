@@ -3,7 +3,6 @@ package tn.ensit.soa.controllers;
 import tn.ensit.soa.dto.PostDto;
 import tn.ensit.soa.entities.Post;
 import tn.ensit.soa.services.PostService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,8 +12,11 @@ import java.util.List;
 @RequestMapping("/posts")
 public class PostController {
 
-    @Autowired
-    private PostService postService;
+    private final PostService postService;
+
+    public PostController(PostService postService) {
+        this.postService = postService;
+    }
 
     @PostMapping("/create")
     public ResponseEntity<Post> createPost(@RequestBody PostDto postDto) {

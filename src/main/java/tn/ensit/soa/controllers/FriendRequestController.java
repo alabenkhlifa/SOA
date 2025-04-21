@@ -3,7 +3,6 @@ package tn.ensit.soa.controllers;
 import tn.ensit.soa.dto.FriendRequestDto;
 import tn.ensit.soa.entities.FriendRequest;
 import tn.ensit.soa.services.FriendRequestService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,8 +12,11 @@ import java.util.List;
 @RequestMapping("/friendRequests")
 public class FriendRequestController {
 
-    @Autowired
-    private FriendRequestService friendRequestService;
+    private final FriendRequestService friendRequestService;
+
+    public FriendRequestController(FriendRequestService friendRequestService) {
+        this.friendRequestService = friendRequestService;
+    }
 
     @PostMapping("/send")
     public ResponseEntity<FriendRequest> sendRequest(@RequestBody FriendRequestDto requestDto) {

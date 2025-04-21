@@ -4,9 +4,6 @@ import tn.ensit.soa.entities.Like;
 import tn.ensit.soa.repositories.LikeRepository;
 import tn.ensit.soa.entities.Post;
 import tn.ensit.soa.entities.User;
-import tn.ensit.soa.repositories.PostRepository;
-import tn.ensit.soa.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,24 +11,28 @@ import java.util.List;
 @Service
 public class LikeService {
 
-    @Autowired
-    private LikeRepository likeRepository;
+    private final LikeRepository repository;
 
-    @Autowired
-    private PostRepository postRepository;
+    private final PostService postService;
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserService userService;
+
+    public LikeService(LikeRepository repository, PostService postService, UserService userService) {
+        this.repository = repository;
+        this.postService = postService;
+        this.userService = userService;
+    }
 
     public Like likePost(Long userId, Long postId) {
-        User user = userRepository.findById(userId).orElseThrow();
-        Post post = postRepository.findById(postId).orElseThrow();
-        Like like = new Like(user, post);
-        return likeRepository.save(like);
+        User user = userService.findById(userId);
+        Post post = postService.findById(postId);
+        return repository.save(
+            new Like(user, post)
+        );
     }
 
     public List<Like> getLikesByPost(Long postId) {
-        Post post = postRepository.findById(postId).orElseThrow();
-        return likeRepository.findByPost(post);
+        Post post = postService.findById(postId);
+        return repository.findByPost(post);
     }
 }

@@ -3,7 +3,6 @@ package tn.ensit.soa.controllers;
 import tn.ensit.soa.dto.CommentDto;
 import tn.ensit.soa.entities.Comment;
 import tn.ensit.soa.services.CommentService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,12 +12,15 @@ import java.util.List;
 @RequestMapping("/comments")
 public class CommentController {
 
-    @Autowired
-    private CommentService commentService;
+    private final CommentService commentService;
+
+    public CommentController(CommentService commentService) {
+        this.commentService = commentService;
+    }
 
     @PostMapping("/add")
     public ResponseEntity<Comment> addComment(@RequestBody CommentDto commentDto) {
-        Comment comment = commentService.commentPost(commentDto.getCommenterId(), commentDto.getPostId(), commentDto.getContent());
+        Comment comment = commentService.addComment(commentDto.getCommenterId(), commentDto.getPostId(), commentDto.getContent());
         return ResponseEntity.ok(comment);
     }
 

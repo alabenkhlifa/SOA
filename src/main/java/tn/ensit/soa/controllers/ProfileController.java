@@ -3,9 +3,7 @@ package tn.ensit.soa.controllers;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tn.ensit.soa.entities.Profile;
-import tn.ensit.soa.entities.User;
 import tn.ensit.soa.services.ProfileService;
-import tn.ensit.soa.services.UserService;
 
 import java.util.List;
 

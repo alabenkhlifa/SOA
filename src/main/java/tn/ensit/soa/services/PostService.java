@@ -3,8 +3,6 @@ package tn.ensit.soa.services;
 import tn.ensit.soa.entities.Post;
 import tn.ensit.soa.repositories.PostRepository;
 import tn.ensit.soa.entities.User;
-import tn.ensit.soa.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,20 +10,27 @@ import java.util.List;
 @Service
 public class PostService {
 
-    @Autowired
-    private PostRepository postRepository;
+    private final PostRepository repository;
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserService userService;
+
+    public PostService(PostRepository repository, UserService userService) {
+        this.repository = repository;
+        this.userService = userService;
+    }
 
     public Post createPost(Long authorId, String content) {
-        User author = userRepository.findById(authorId).orElseThrow();
+        User author = userService.findById(authorId);
         Post post = new Post(author, content);
-        return postRepository.save(post);
+        return repository.save(post);
     }
 
     public List<Post> getPostsByAuthor(Long authorId) {
-        User author = userRepository.findById(authorId).orElseThrow();
-        return postRepository.findByAuthor(author);
+        User author = userService.findById(authorId);
+        return repository.findByAuthor(author);
+    }
+
+    public Post findById(Long id) {
+        return repository.findById(id).orElseThrow();
     }
 }

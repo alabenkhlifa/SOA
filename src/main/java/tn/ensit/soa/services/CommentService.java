@@ -4,9 +4,6 @@ import tn.ensit.soa.entities.Comment;
 import tn.ensit.soa.entities.Post;
 import tn.ensit.soa.entities.User;
 import tn.ensit.soa.repositories.CommentRepository;
-import tn.ensit.soa.repositories.PostRepository;
-import tn.ensit.soa.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,24 +11,28 @@ import java.util.List;
 @Service
 public class CommentService {
 
-    @Autowired
-    private CommentRepository commentRepository;
+    private final CommentRepository repository;
 
-    @Autowired
-    private PostRepository postRepository;
+    private final PostService postService;
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserService userService;
 
-    public Comment commentPost(Long commenterId, Long postId, String content) {
-        User commenter = userRepository.findById(commenterId).orElseThrow();
-        Post post = postRepository.findById(postId).orElseThrow();
-        Comment comment = new Comment(commenter, post, content);
-        return commentRepository.save(comment);
+    public CommentService(CommentRepository repository, PostService postService, UserService userService) {
+        this.repository = repository;
+        this.postService = postService;
+        this.userService = userService;
+    }
+
+    public Comment addComment(Long commenterId, Long postId, String content) {
+        User commenter = userService.findById(commenterId);
+        Post post = postService.findById(postId);
+        return repository.save(
+            new Comment(commenter, post, content)
+        );
     }
 
     public List<Comment> getCommentsByPost(Long postId) {
-        Post post = postRepository.findById(postId).orElseThrow();
-        return commentRepository.findByPost(post);
+        Post post = postService.findById(postId);
+        return repository.findByPost(post);
     }
 }

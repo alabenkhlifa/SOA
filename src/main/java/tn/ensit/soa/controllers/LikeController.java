@@ -3,7 +3,6 @@ package tn.ensit.soa.controllers;
 import tn.ensit.soa.dto.LikeDto;
 import tn.ensit.soa.entities.Like;
 import tn.ensit.soa.services.LikeService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,8 +12,11 @@ import java.util.List;
 @RequestMapping("/likes")
 public class LikeController {
 
-    @Autowired
-    private LikeService likeService;
+    private final LikeService likeService;
+
+    public LikeController(LikeService likeService) {
+        this.likeService = likeService;
+    }
 
     @PostMapping("/add")
     public ResponseEntity<Like> addLike(@RequestBody LikeDto likeDto) {

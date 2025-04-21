@@ -1,6 +1,5 @@
 package tn.ensit.soa.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tn.ensit.soa.dto.MessageDto;
@@ -17,11 +16,11 @@ public class MessageController {
 
     private final MessageService messageService;
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
-    public MessageController(MessageService messageService) {
+    public MessageController(MessageService messageService, UserService userService) {
         this.messageService = messageService;
+        this.userService = userService;
     }
 
     @PostMapping("/send")

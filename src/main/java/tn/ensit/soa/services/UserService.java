@@ -1,10 +1,8 @@
 package tn.ensit.soa.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.ensit.soa.entities.Profile;
 import tn.ensit.soa.entities.User;
-import tn.ensit.soa.repositories.ProfileRepository;
 import tn.ensit.soa.repositories.UserRepository;
 
 import java.util.List;
