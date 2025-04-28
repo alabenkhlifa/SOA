@@ -3,10 +3,8 @@ config:
   theme: neutral
 ---
 flowchart TD
-    User
-    Profile
-    Comment
     subgraph US[User Service]
+        FriendshipRequest -- from / to --> User
         Profile --> User
     end
     subgraph CS[Chat Service]
